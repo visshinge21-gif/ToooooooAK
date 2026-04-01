@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Like To Talk You But I Want to Be Honest</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffb6c1 0%, #f38bbf 25%, #ffc0cb 50%, #ff1493 75%, #ff69b4 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 58, 68, 0.836) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,105,180,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,192,203,0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .scrapbook {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #c96a7a, #e284b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #6c9dcb;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(15px);
+            margin: 50px 0;
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(255,105,180,0.3);
+            border: 2px solid rgba(255,20,147,0.2);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(40px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #e885ba, #e184b2, #ffc0cb);
+        }
+        
+        .emoji {
+            font-size: 4rem;
+            display: block;
+            text-align: center;
+            margin: 25px 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        
+        .emoji:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .section h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fb7da0;
+        }
+        
+        .bullet-list {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .bullet-list li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 20px;
+            color: #3f170b;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+        
+        .bullet-list li:hover {
+            color: #333;
+        }
+        
+        .bullet-list li::before {
+            content: '💕';
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+        
+        .bullet-list li:nth-child(2n)::before {
+            content: '🌹';
+        }
+        
+        .bullet-list li:nth-child(3n)::before {
+            content: '✨';
+        }
+        
+        .bullet-list li:nth-child(4n)::before {
+            content: '💔';
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .popup-note {
+            background: linear-gradient(135deg, rgba(255,20,147,0.1), rgba(255,105,180,0.15));
+            border: 2px dashed rgba(255,105,180,0.5);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 30px auto;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            max-width: 550px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #880e4f;
+            text-align: center;
+            position: relative;
+        }
+        
+        .popup-note:hover {
+            background: linear-gradient(135deg, rgba(255,20,147,0.2), rgba(255,105,180,0.25));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255,105,180,0.4);
+        }
+        
+        .song {
+            background: linear-gradient(135deg, rgba(255,192,203,0.4) 0%, rgba(255,105,180,0.3) 100%);
+            color: #880e4f;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 35px;
+            box-shadow: 0 15px 40px rgba(255,105,180,0.3);
+            border: 2px solid rgba(255,20,147,0.3);
+        }
+        
+        .song h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.8rem; }
+            .section { padding: 30px; margin: 30px 0; }
+            .section h2 { font-size: 2rem; }
+            .bullet-list li { font-size: 1rem; padding-left: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scrapbook">
+        <div class="header">
+            <h1>“Soft Feelings, Silent Pain”</h1>
+            <P>Toooooooooooo AK</P>
+        </div>
+        
+        <!-- Section 1: How It Started -->
+        <section class="section">
+            <span class="emoji" onclick="createHearts(event)">🌸</span>
+            <h2>How It Started</h2>
+            <ul class="bullet-list">
+                <li>I still remember how it all started…
+so simple, so unexpected… yet it felt like something my heart already knew.</li>
+                <li>From random talks to endless conversations,
+you slowly became my favorite part of every day.</li>
+                <li>I didn’t notice when your name started making me smile,
+or when I began waiting for your messages like they meant everything</li>
+                <li>And then there were your hugs…
+the ones I secretly craved more than I admitted.
+In your arms, everything felt softer… calmer… like the world paused just for us.
+It felt like I finally found a place where I belonged</li>
+                <li>Somewhere between those moments, those talks, those hugs…
+you became my first kiss—
+and something much more than I ever planned.</li>
+            </ul>
+            <div class="popup-note" onclick="this.innerHTML='I saved every single one of your good morning texts... 💙'">
+                tap my secret thought
+            </div>
+        
+        </section>
+        
+        <!-- Section 2: What I Like About You -->
+        <section class="section">
+            <span class="emoji" onclick="createHearts(event)">💖</span>
+            <h2>What I Love About You</h2>
+            <ul class="bullet-list">
+                <li>For the one who was my first kiss… and somehow became so much more than just that—</li>
+                <li>I like how you came into my life and made everything feel a little better, a little lighter. In these 1.5 years, you didn't just stay… you became someone I started depending on without even realizing.</li>
+                <li>I like how you're always by my side, even when I don't say anything. Your presence feels like comfort I didn't know I needed.</li>
+                <li>"You were my first in many ways… and maybe that's why you'll always be special to me." 💌</li>
+                <li>I like how you slowly crossed my boundaries… not in a bad way, but in a way that made me trust you, feel safe with you.</li>
+            </ul>
+            
+        </section>
+        
+        <!-- Section 3: The Part That Hurts -->
+        <section class="section">
+            <span class="emoji" onclick="createRain(event)">🌙</span>
+            <h2>But This Hurts</h2>
+            <ul class="bullet-list">
+                <li>I don't know how to say this without making it heavy… but I miss how we used to be.</li>
+                <li>There was a time when we talked all the time, shared everything, even the smallest things. And now… sometimes we don't even talk for 5 minutes in a day.</li>
+                <li>Maybe it's normal, maybe things change… but it hurts me more than I show.</li>
+                <li>I know you're not ignoring me, and I understand you might be trying to keep a distance so you don't get too attached… But cutuu… I think I already got a little attached to you 💔</li>
+                <li>You might not believe it, but you're the one who makes me feel better without even trying. And when you're not around like before, it leaves a quiet emptiness inside me.</li>
+                <li>I know someday you'll have your own life, maybe even marry someone else… and I've slowly started accepting that.</li>
+                <li>But till that day… can you just talk to me like before? A little more softly, a little more like us?</li>
+            </ul>
+            <div class="popup-note" onclick="this.innerHTML='I overthink sometimes because I miss what we had... 💧💔'">
+                the truth I hide
+            </div>
+        </section>
+        
+        <!-- Section 4: What I Wish -->
+        <section class="section">
+            <span class="emoji" onclick="createStars(event)">🌈</span>
+            <h2>What I Wish For</h2>
+            <ul class="bullet-list">
+                <li>Late night texts that last till morning</li>
+                <li>Consistent "good morning" texts</li>
+                <li>Plans we actually keep together</li>
+                <li>Your hand reaching for mine</li>
+                <li>🛵 A Small Thing I Felt - About that bullet ride I mentioned long ago… it's okay if you don't want to now.</li>
+                <li>It's just… I was really excited about it back then, and somewhere it felt like it didn't matter that much to you.</li>
+            </ul>
+            <div class="popup-note" onclick="this.innerHTML='I still believe we could be magic... if you wanted to be 💫✨'">
+                my hopeful dream
+            </div>
+        </section>
+        
+        <!-- Section 5: Final Note -->
+        <section class="section">
+            <span class="emoji" onclick="createHearts(event)">✨</span>
+            <h2>From My Broken Heart</h2>
+            <ul class="bullet-list" style="max-width: 600px; font-size: 1.15rem;">
+                <li>I just want to say one thing… if you're not interested in talking to me, it's completely okay</li>
+                <li>Just tell me once, clearly… and I won't disturb you again. I don't want to keep waiting or holding on to something that isn't there</li>
+                <li>I'd rather know the truth than feel like I have no one to talk to. No expectations… no confusion… just clarity.</li>
+                <li>I know you're busy, and I understand that. But if you want, we can just end this here—nicely.</li>
+                <li>Thank you for the memories.</li>
+            </ul>
+    
+        </section>
+    </div>
+
+    <script>
+        function createHearts(e) {
+            for(let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💕';
+                    heart.style.position = 'fixed';
+                    heart.style.left = e.clientX + 'px';
+                    heart.style.top = e.clientY + 'px';
+                    heart.style.fontSize = '20px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '1000';
+                    heart.style.transition = 'all 2s ease';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.animate([
+                            { transform: 'translateY(0px) scale(1)', opacity: 1 },
+                            { transform: `translateY(-100px) translateX(${Math.random()*100-50}px) scale(0)`, opacity: 0 }
+                        ], {
+                            duration: 2000
+                        }).onfinish = () => heart.remove();
+                    }, 10);
+                }, i * 100);
+            }
+        }
+        
+        function createRain(e) {
+            for(let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const drop = document.createElement('div');
+                    drop.innerHTML = '💧';
+                    drop.style.position = 'fixed';
+                    drop.style.left = e.clientX + 'px';
+                    drop.style.top = e.clientY + 'px';
+                    drop.style.fontSize = '18px';
+                    drop.style.pointerEvents = 'none';
+                    drop.style.zIndex = '1000';
+                    document.body.appendChild(drop);
+                    
+                    setTimeout(() => {
+                        drop.animate([
+                            { transform: 'translateY(0px)', opacity: 1 },
+                            { transform: `translateY(150px) translateX(${Math.random()*40-20}px)`, opacity: 0 }
+                        ], {
+                            duration: 2500
+                        }).onfinish = () => drop.remove();
+                    }, 10);
+                }, i * 80);
+            }
+        }
+        
+        function createStars(e) {
+            for(let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const star = document.createElement('div');
+                    star.innerHTML = '✨';
+                    star.style.position = 'fixed';
+                    star.style.left = e.clientX + 'px';
+                    star.style.top = e.clientY + 'px';
+                    star.style.fontSize = '22px';
+                    star.style.pointerEvents = 'none';
+                    star.style.zIndex = '1000';
+                    document.body.appendChild(star);
+                    
+                    setTimeout(() => {
+                        star.animate([
+                            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                            { transform: `translate(${Math.random()*80-40}px, ${Math.random()*-80}px) scale(0)`, opacity: 0 }
+                        ], {
+                            duration: 2200
+                        }).onfinish = () => star.remove();
+                    }, 10);
+                }, i * 90);
+            }
+        }
+    </script>
+</body>
+</html>
